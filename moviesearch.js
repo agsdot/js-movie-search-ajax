@@ -32,9 +32,30 @@ $(document).ready(function(){
     });
   });
 
-  $('li').on('click', 'data-id', function(){
+  $('#results').on('click', 'li', specifics);
 
-  })
+  function specifics() {
+    var imdbid = $(this).attr('data-id');
+    $.ajax({
+      url: 'http://www.omdbapi.com/?plot=full&i=' + imdbid,
+      method: 'get',
+      dataType: 'json',
+      success: function(detailview){
+          $('#movieresult').html('');
+
+          var title = detailview['Title'];
+          var year = detailview['Year'];
+          var plot = ('<p>' + detailview['Plot'] + '</p>');
+          var poster = ('<img src="' + detailview['Poster'] + '"/>');
+          var actors = detailview['Actors'];
+          var movieInfo = $('#movieresult');
+          movieInfo.append(title, poster, plot);
+
+      }
+
+    });
+
+  }
 
 });
 
