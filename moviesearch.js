@@ -1,17 +1,11 @@
 $(document).ready(function(){
-  // alert('ready');
   var moviehash;
 
   $('form').keyup('click', function(event){
-    // alert('submit');
-
-
     event.preventDefault();
     var form = $(this);
     var inputwithspace = $('#movieinput').val();
     var inputhtmlfriendly = inputwithspace.replace(' ', '%20');
-
-
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + inputhtmlfriendly,
       method: 'get',
@@ -25,15 +19,17 @@ $(document).ready(function(){
           var year = movie["Year"];
           var imdbid = movie["imdbID"];
 
-          var el = "<li>"+title + ' (' + year + ') ' + "</li>";
+          var el = "<li data-id='" + imdbid + "'>" + title + ' (' + year + ') ' + "</li>";
           $(el).appendTo('#results');
-        };
+        }
 
       }
     });
-
-
   });
+
+  $('li').on('click', 'data-id', function(){
+
+  })
 
 });
 
