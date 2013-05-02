@@ -18,9 +18,14 @@ $(document).ready(function(){
           var title = movie["Title"];
           var year = movie["Year"];
           var imdbid = movie["imdbID"];
-
-          var el = "<li data-id='" + imdbid + "'>" + title + ' (' + year + ') ' + "</li>";
-          $(el).appendTo('#results');
+          var list = $('#results');
+          var result = $('<li data-id="' + imdbid + '"></li>');
+          var link = $('<a href="#"></a>');
+          link.append(title, year);
+          result.append(link);
+          list.append(result);
+          // var el = "<li data-id='" + imdbid + "'>" + title + ' (' + year + ') ' + "</li>";
+          // $(el).appendTo('#results');
         }
 
       }
